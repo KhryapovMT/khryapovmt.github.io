@@ -1,11 +1,12 @@
-<!DOCTYPE html>
 <html>
 <head>
     <title>Weather Now</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" integrity="sha384-bCDdYrX9pNVvH6UHKgy6U1Cnd4m4pHwF4k45eC7vnYKVWUK9XQvBNfN4+fdfrgkh" crossorigin="">
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js" integrity="sha384-A86PzCSCV7TD5O5q5V7Ykw/GtX9O7i5BtO27L+IeHyo8EuJw4DXgr0ggy1YpgYga" crossorigin=""></script>
+    <script src="script.js"></script>
     <script>
         const apiKey = '793a1cd72c1b51c1050e'; // replace with your OpenWeatherMap API key
 
@@ -22,16 +23,21 @@
             form.reset();
         });
 
-        async function getCurrentWeather(location) {
-            try {
-                const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`);
-                const data = await response.json();
-                displayCurrentWeather(data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
+      async function getCurrentWeather(location) {
+    try {
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`);
+        const data = await response.json();
+        displayCurrentWeather(data);
+        const map = L.map('map').setView([data.coord.lat, data.coord.lon], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+            maxZoom: 18,
+        }).addTo(map);
+        L.marker([data.coord.lat, data.coord.lon]).addTo(map);
+    } catch (error) {
+        console.log(error);
+    }
+}
         async function getForecast(location) {
             try {
                 const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=${apiKey}`);
@@ -91,8 +97,14 @@
                 <button type="submit">Get Weather</button>
             </form>
         </section>
-
-        <section>
+	    
+	 <section>
+            <h2>5-Day Forecast</h2>
+            <div id="forecast"></div>
+        </section>
+        <div id="map"></div>
+       
+	<section>
             <h2>5-Day Forecast</h2>
             <div id="forecast"></div>
         </section>
