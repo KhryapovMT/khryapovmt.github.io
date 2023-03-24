@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Weather Now</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="style.css">
-	<script>
+    <title>Weather Now</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <script>
         const apiKey = '793a1cd72c1b51c1050e'; // replace with your OpenWeatherMap API key
 
         const form = document.querySelector('form');
@@ -70,36 +71,34 @@
         }
     </script>
 </head>
+
 <body>
-	<header>
-		<h1>Weather Now</h1>
-	</header>
-	<main>
-		<section>
-			<h2>Current Weather</h2>
-			<p>Temperature: 25°C</p>
-			<p>Conditions: Sunny</p>
-			<p>Wind Speed: 10 km/h</p>
-		</section>
-		<section>
-			<form>
-				<label for="location">Enter location:</label>
-				<input type="text" id="location" required>
-				<button type="submit">Get Weather</button>
-			</form>
-		</section>
-		<section id="forecast">
-			<h2>5-Day Forecast</h2>
-			<ul>
-				<li>Day 1: Sunny, 25°C</li>
-				<li>Day 2: Partly Cloudy, 24°C</li>
-				<li>Day 3: Rainy, 20°C</li>
-				<li>Day 4: Cloudy, 22°C</li>
-				<li>Day 5: Sunny, 26°C</li>
-			</ul>
-		</section>
-	</main>
-	<footer>
+    <header>
+        <h1>Weather Now</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Current Weather</h2>
+            <div id="current-weather"></div>
+        </section>
+
+        <section>
+            <h2>Enter a Location</h2>
+            <form>
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" required>
+                <button type="submit">Get Weather</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>5-Day Forecast</h2>
+            <div id="forecast"></div>
+        </section>
+    </main>
+
+    <footer>
 		<p>&copy; 2023 Weather Now</p>
 	</footer>
 </body>
