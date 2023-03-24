@@ -23,8 +23,9 @@ section {
 margin-bottom: 20px;
 border: 1px solid #ccc;
 padding: 10px;
-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a shadow to create depth /
-transform: perspective(600px) rotateY(10deg); / Add a 3D effect */
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+transform: perspective(600px) rotateY(10deg);
+animation: fadeInUp 1s ease; /* Add an animation */
 }
 
 ul {
@@ -48,5 +49,17 @@ text-align: center;
 @media (max-width: 600px) {
 main {
 padding: 10px;
+}
+}
+
+/* Animation */
+@keyframes fadeInUp {
+0% {
+transform: translateY(50px);
+opacity: 0;
+}
+100% {
+transform: translateY(0);
+opacity: 1;
 }
 }
